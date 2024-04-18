@@ -2,6 +2,8 @@
 
 mainmenu "Klipper Firmware Configuration"
 
+source "src/configs/Kconfig"
+
 config LOW_LEVEL_OPTIONS
     bool "Enable extra low-level configuration options"
     help
@@ -24,6 +26,8 @@ choice
         bool "Huada Semiconductor HC32F460"
     config MACH_RP2040
         bool "Raspberry Pi RP2040"
+        config MACH_GD32
+        bool "Giga Device GD32"
     config MACH_PRU
         bool "Beaglebone PRU"
     config MACH_AR100
@@ -41,10 +45,16 @@ source "src/lpc176x/Kconfig"
 source "src/stm32/Kconfig"
 source "src/hc32f460/Kconfig"
 source "src/rp2040/Kconfig"
+source "src/gd32/Kconfig"
 source "src/pru/Kconfig"
 source "src/ar100/Kconfig"
 source "src/linux/Kconfig"
 source "src/simulator/Kconfig"
+
+config MCU_MENU
+    string 
+    default "S" if MACH_STM32
+    default "G" if MACH_GD32
 
 # Generic configuration options for serial ports
 config SERIAL
@@ -158,6 +168,19 @@ config CANBUS_FILTER
     bool
     default y if CANSERIAL
 
+
+choice
+    prompt "Creality machine type"
+    config MACH_CREALITY_OTHERS
+        bool "CREALITY others"
+    config MACH_CREALITY_CR_10_SMART
+        bool "CREALITY CR-10 SMART"
+    config INITIAL_PINS
+    depends on MACH_CREALITY_CR_10_SMART
+        string 
+        default "PA0"
+endchoice
+
 # Support setting gpio state at startup
 config INITIAL_PINS
     string "GPIO pins to set at micro-controller startup"
@@ -174,6 +197,9 @@ config HAVE_GPIO
     bool
 config HAVE_GPIO_ADC
     bool
+config HAVE_PRTOUCH
+    bool
+    default n
 config HAVE_GPIO_SPI
     bool
 config HAVE_GPIO_SDIO

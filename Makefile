@@ -4,6 +4,9 @@
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
 
+# host file
+host-tool-src = tool/host_crc16.c
+
 # Output directory
 OUT=out/
 
@@ -72,6 +75,10 @@ $(OUT)klipper.elf: $(OBJS_klipper.elf)
 	@echo "  Linking $@"
 	$(Q)$(CC) $(OBJS_klipper.elf) $(CFLAGS_klipper.elf) -o $@
 	$(Q)scripts/check-gcc.sh $@ $(OUT)compile_time_request.o
+
+$(OUT)hostCrc16.elf: $(host-tool-src)
+	@echo "  Compiling and Linking $@"
+	$(Q)gcc $< -o $@
 
 ################ Compile time requests
 
