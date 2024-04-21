@@ -37,4 +37,4 @@ cp out/klipper.elf ./built/klipper_mcu
 
 make clean
 rm -f built/release.tar.gz
-tar czvf built/release.tar.gz *
+tar czvf built/release.tar.gz built/* scripts/* klippy/* *.sh *.md

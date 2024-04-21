@@ -19,6 +19,10 @@ board ==   "CR4CU220812S10" | "CR4CU220812S11" | "CR4CU220812S12"
 
 CR4CU220812S12 == K1C
 
+# firmware stored
+KLIPPER_DIR=/usr/share/klipper
+FW_ROOT_DIR=$KLIPPER_DIR/fw
+
 # mcu ports
 mcu0_serial=/dev/ttyS7
 bed0_serial=/dev/ttyS9
