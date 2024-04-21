@@ -18,10 +18,11 @@ jobs:
         run: |
           docker build -f .github/workflows/Dockerfile -t k1c-build .
           docker run --rm -v "$(pwd):/data" k1c-build
+          
       
       - name: deploy
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           make_latest: true
-          files: "**"
+          files: "built/release.tar.gz"
