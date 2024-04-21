@@ -35,4 +35,3 @@ menu "Board Configure"
         default 000
 
 endmenu
-

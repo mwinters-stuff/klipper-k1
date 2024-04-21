@@ -52,7 +52,7 @@ source "src/linux/Kconfig"
 source "src/simulator/Kconfig"
 
 config MCU_MENU
-    string 
+    string
     default "S" if MACH_STM32
     default "G" if MACH_GD32
 
@@ -177,7 +177,7 @@ choice
         bool "CREALITY CR-10 SMART"
     config INITIAL_PINS
     depends on MACH_CREALITY_CR_10_SMART
-        string 
+        string
         default "PA0"
 endchoice
 

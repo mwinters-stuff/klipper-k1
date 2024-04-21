@@ -61,10 +61,28 @@ def check_file(filename):
 def main():
     files = sys.argv[1:]
     for filename in files:
-        check_file(filename)
+        if not k1_file(filename):
+            check_file(filename)
     if HaveError:
         sys.stderr.write("\n\n")
         sys.exit(-1)
+
+# Creality K1 files added do not meet the requirements above, shouldnt fix
+# as that will make later "merges" of these files difficult so exclude.
+def k1_file(filename):
+    return filename.startswith("src/gd32") or \
+        filename in [
+            "src/prtouch_v2_compile.c",
+            "src/hx711s.c",
+            "src/fan_check.c",
+            "src/dirzctl.c",
+            "klippy/extras/metadata.py",
+            "klippy/extras/bl24c16f.py",
+            "klippy/extras/prtouch_v2.py",
+            "klippy/extras/fan_feedback.py",
+            "klippy/extras/custom_macro.py",
+            "klippy/extras/tool.py"
+        ]
 
 if __name__ == '__main__':
     main()
