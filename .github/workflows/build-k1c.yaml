@@ -1,0 +1,27 @@
+name: Creality K1C deploy
+on:
+  push:
+    branches:
+      - "creality-k1-mods"
+    tags:
+      - "v*.*.*"    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: build
+        run: |
+          docker build -f .github/workflows/Dockerfile -t k1c-build .
+          docker run --rm -v "$(pwd):/data" k1c-build
+      
+      - name: deploy
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          make_latest: true
+          files: **

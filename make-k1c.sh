@@ -34,3 +34,5 @@ cp src/configs/linux_host_defconfig .config
 make clean
 CROSS_PREFIX=mipsel-linux-gnu- make || exit 1
 cp out/klipper.elf ./built/klipper_mcu
+
+make clean
