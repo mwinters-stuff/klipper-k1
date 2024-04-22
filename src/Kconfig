@@ -190,6 +190,16 @@ config INITIAL_PINS
         during the micro-controller startup sequence. By default the
         pins will be set to output high - preface a pin with a '!'
         character to set that pin to output low.
+        "PA0" is default value for CREALITY CR-10 SMART, and MUST NOT
+        MODIFIY! For the other machine types you should add pin name with
+        your hardware configurations.
+
+config BUILD_MACHINE_UID
+    string "Custom your machine firmware name as unique ID"
+    depends on LOW_LEVEL_OPTIONS
+    help
+        It is for klipper host making a distinction between each 
+        printer when one host controls more than one machine. 
 
 # The HAVE_x options allow boards to disable support for some commands
 # if the hardware does not support the feature.

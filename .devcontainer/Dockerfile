@@ -1,3 +1,4 @@
+FROM ballaswag/guppydev:latest AS mipstools
 FROM mcr.microsoft.com/devcontainers/cpp:1-ubuntu-20.04
 
 ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="none"
@@ -16,4 +17,8 @@ RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
 # [Optional] Uncomment this section to install additional packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install  \
-    gcc-arm-none-eabi srecord gcc-mipsel-linux-gnu
+    gcc-arm-none-eabi srecord
+
+COPY --from=mipstools /toolchains/mips-gcc720-glibc229 /toolchains/mips-gcc720-glibc229
+
+ENV PATH=/toolchains/mips-gcc720-glibc229/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin

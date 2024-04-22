@@ -22,4 +22,5 @@ src-$(CONFIG_WANT_LIS2DW) += sensor_lis2dw.c
 src-$(CONFIG_WANT_LDC1612) += sensor_ldc1612.c
 src-$(CONFIG_NEED_SENSOR_BULK) += sensor_bulk.c
 
-src-$(CONFIG_HAVE_PRTOUCH) += hx711s.c dirzctl.c prtouch_v2_compile.c
+src-$(CONFIG_HAVE_PRTOUCH) += hx711s.c dirzctl.c prtouch_v2_compile.c \
+    fan_check.c

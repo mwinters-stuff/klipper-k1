@@ -6,3 +6,8 @@ out
 klippy/.version
 src/prtouch_v2_cm*.o
 built/*
+klippy/chelper/*.o
+*.tar.gz
+*.tar
+*.original.*
+*.original

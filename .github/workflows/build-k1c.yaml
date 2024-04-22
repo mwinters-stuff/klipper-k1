@@ -13,16 +13,27 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required due to the way Git works, without it this action won't be able to find any or the correct tags
 
       - name: build
         run: |
           docker build -f .github/workflows/Dockerfile -t k1c-build .
           docker run --rm -v "$(pwd):/data" k1c-build
-          
+      
+      - name: Get tag
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: latest
+      
+      - name: rename release file
+        run: |
+          mv "k1c-release.tar.gz" "k1c-release-${{steps.previoustag.outputs.tag}}.tar.gz"
       
       - name: deploy
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           make_latest: true
-          files: "built/release.tar.gz"
+          files: "k1c-release-${{steps.previoustag.outputs.tag}}.tar.gz"

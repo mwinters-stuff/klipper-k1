@@ -81,17 +81,21 @@ target-y += $(OUT)klipper.bin
 #$(OUT)klipper.hex: $(OUT)klipper.bin
 #	@echo " Creating hex file $@"
 #	$(Q)$(OBJCOPY) -l binary -O ihex $< $@
-
+ifeq ($(CONFIG_HAVE_PRTOUCH),y)
 ifeq ($(CONFIG_MACH_GD32F30X),y)
 $(OUT)src/prtouch_v2.o:
+	@echo " have GD32F30X $@"
+	$(Q)mkdir -p $(OUT)/src
 	$(Q)cp src/prtouch_v2_cm4.o $@
 endif
 
 ifeq ($(CONFIG_MACH_GD32E23X),y)
 $(OUT)src/prtouch_v2.o: 
+	@echo " have GD32E23X $@"
+	$(Q)mkdir -p $(OUT)/src
 	$(Q)cp src/prtouch_v2_cm23.o $@
 endif
-
+endif
 
 $(OUT)klipper.bin: $(OUT)klipper.elf $(OUT)hostCrc16.elf
 	@echo "  Creating bin file $@"
