@@ -11,3 +11,4 @@ klippy/chelper/*.o
 *.tar
 *.original.*
 *.original
+k/**

@@ -35,7 +35,7 @@ cc-option=$(shell if test -z "`$(1) $(2) -S -o /dev/null -xc /dev/null 2>&1`" \
 CFLAGS := -iquote $(OUT) -iquote src -iquote $(OUT)board-generic/ \
 		-std=gnu11 -O2 -MD -Wall \
 		-Wold-style-definition $(call cc-option,$(CC),-Wtype-limits,) \
-    -ffunction-sections -fdata-sections -fno-delete-null-pointer-checks
+		-ffunction-sections -fdata-sections -fno-delete-null-pointer-checks
 CFLAGS += -flto=auto -fwhole-program -fno-use-linker-plugin -ggdb3
 
 OBJS_klipper.elf = $(patsubst %.c, $(OUT)src/%.o,$(src-y))
@@ -48,7 +48,7 @@ CPPFLAGS = -I$(OUT) -P -MD -MT $@
 target-y := $(OUT)klipper.elf
 target-y += $(OUT)hostCrc16.elf
 ifeq ($(CONFIG_HAVE_PRTOUCH),y)
-  pr_touch_link := $(OUT)src/prtouch_v2.o
+	pr_touch_link := $(OUT)src/prtouch_v2.o
 	target-y += $(pr_touch_link)
 else
   pr_touch_link := 
