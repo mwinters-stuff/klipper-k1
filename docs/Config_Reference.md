@@ -998,6 +998,13 @@ Visual Examples:
 #adaptive_margin:
 #   An optional margin (in mm) to be added around the bed area used by
 #   the defined print objects when generating an adaptive mesh.
+#scan_overshoot:
+#  The maximum amount of travel (in mm) available outside of the mesh.
+#  For rectangular beds this applies to travel on the X axis, and for round beds
+#  it applies to the entire radius.  The tool must be able to travel the amount
+#  specified outside of the mesh.  This value is used to optimize the travel
+#  path when performing a "rapid scan".  The minimum value that may be specified
+#  is 1.  The default is no overshoot.
 ```
 
 ### [bed_tilt]
@@ -2007,6 +2014,9 @@ Support for eddy current inductive probes. One may define this section
 sensor_type: ldc1612
 #   The sensor chip used to perform eddy current measurements. This
 #   parameter must be provided and must be set to ldc1612.
+#intb_pin:
+#   MCU gpio pin connected to the ldc1612 sensor's INTB pin (if
+#   available). The default is to not use the INTB pin.
 #z_offset:
 #   The nominal distance (in mm) between the nozzle and bed that a
 #   probing attempt should stop at. This parameter must be provided.
@@ -3327,11 +3337,8 @@ run_current:
 #high_velocity_threshold:
 #   The velocity (in mm/s) to set the TMC driver internal "high
 #   velocity" threshold (THIGH) to. This is typically used to disable
-#   the "CoolStep" feature at high speeds. Important - if
-#   high_velocity_threshold is set and "sensorless homing" is used,
-#   then one must ensure that the homing speed is below the high
-#   velocity threshold! The default is to not set a TMC "high
-#   velocity" threshold.
+#   the "CoolStep" feature at high speeds. The default is to not set a
+#   TMC "high velocity" threshold.
 #driver_MSLUT0: 2863314260
 #driver_MSLUT1: 1251300522
 #driver_MSLUT2: 608774441
@@ -3646,11 +3653,8 @@ run_current:
 #high_velocity_threshold:
 #   The velocity (in mm/s) to set the TMC driver internal "high
 #   velocity" threshold (THIGH) to. This is typically used to disable
-#   the "CoolStep" feature at high speeds. Important - if
-#   high_velocity_threshold is set and "sensorless homing" is used,
-#   then one must ensure that the homing speed is below the high
-#   velocity threshold! The default is to not set a TMC "high
-#   velocity" threshold.
+#   the "CoolStep" feature at high speeds. The default is to not set a
+#   TMC "high velocity" threshold.
 #driver_MSLUT0: 2863314260
 #driver_MSLUT1: 1251300522
 #driver_MSLUT2: 608774441
@@ -3782,11 +3786,8 @@ run_current:
 #high_velocity_threshold:
 #   The velocity (in mm/s) to set the TMC driver internal "high
 #   velocity" threshold (THIGH) to. This is typically used to disable
-#   the "CoolStep" feature at high speeds. Important - if
-#   high_velocity_threshold is set and "sensorless homing" is used,
-#   then one must ensure that the homing speed is below the high
-#   velocity threshold! The default is to not set a TMC "high
-#   velocity" threshold.
+#   the "CoolStep" feature at high speeds. The default is to not set a
+#   TMC "high velocity" threshold.
 #driver_MSLUT0: 2863314260
 #driver_MSLUT1: 1251300522
 #driver_MSLUT2: 608774441
